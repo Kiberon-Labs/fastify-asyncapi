@@ -1,0 +1,12 @@
+dist
+node_modules
+# Generated documentation
+documentation 
+coverage
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+.tsbuildinfo

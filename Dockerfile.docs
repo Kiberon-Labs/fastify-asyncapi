@@ -1,0 +1,10 @@
+FROM node:20-alpine
+
+WORKDIR /app
+
+# Install TypeDoc globally
+RUN npm install -g typedoc typedoc-plugin-markdown
+
+
+# Generate documentation
+CMD ["typedoc"] 

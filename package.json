@@ -1,0 +1,62 @@
+{
+    "name": "fastify-asyncapi",
+    "version": "1.0.0",
+    "type": "module",
+    "description": "A fastify plugin to generate AsyncAPI documentation for your Fastify application.",
+    "exports": {
+        ".": {
+            "types": "./dist/index.d.ts",
+            "import": "./dist/index.js",
+            "default": "./dist/index.js"
+        }
+    },
+    "types": "./dist/index.d.ts",
+    "main": "./dist/index.js",
+    "repository": {
+        "type": "git",
+        "url": "git+ssh://git@Kiberon-Labs/fastify-asyncapi.git"
+    },
+    "scripts": {
+        "changeset": "changeset",
+        "release": "npm run build && changeset publish",
+        "build": "tsc",
+        "dev": "tsc --incremental --watch",
+        "canary": "tsx ./src/canary/index.ts",
+        "check": "npx @biomejs/biome@2.3.1 check .",
+        "fix": "npx @biomejs/biome@2.3.1 check --write .",
+        "test": "vitest",
+        "test:coverage": "vitest run --coverage"
+    },
+    "keywords": [
+        "fastify",
+        "asyncapi",
+        "documentation",
+        "plugin"
+    ],
+    "author": "Kiberon Labs <admin@kiberonlabs.com>",
+    "license": "MIT",
+    "files": [
+        "dist"
+    ],
+    "engines": {
+        "node": ">=20"
+    },
+    "devDependencies": {
+        "@changesets/cli": "^2.29.4",
+        "@types/node": "^20.11.24",
+        "@vitest/coverage-v8": "^3.2.4",
+        "fastify": "^5.8.1",
+        "tsx": "^4.20.6",
+        "typescript": "^5.8.3",
+        "vitest": "^3.2.4"
+    },
+    "publishConfig": {
+        "access": "public"
+    },
+    "peerDependencies": {
+        "fastify": "^5.x.x"
+    },
+    "dependencies": {
+        "fastify-plugin": "^5.1.0"
+    }
+}

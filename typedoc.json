@@ -1,0 +1,32 @@
+{
+    "entryPoints": [
+        "src/index.ts"
+    ],
+    "out": "documentation",
+    "excludePrivate": true,
+    "excludeProtected": true,
+    "excludeExternals": true,
+    "theme": "default",
+    "name": "Quickstart Node.js",
+    "readme": "README.md",
+    "plugin": [
+        "typedoc-plugin-markdown"
+    ],
+    "projectDocuments": [
+        "docs/tutorial.md"
+    ],
+    "categorizeByGroup": true,
+    "categoryOrder": [
+        "Core",
+        "Utils",
+        "*"
+    ],
+    "sort": [
+        "source-order"
+    ],
+    "searchInComments": true,
+    "validation": {
+        "invalidLink": true,
+        "notExported": true
+    }
+}

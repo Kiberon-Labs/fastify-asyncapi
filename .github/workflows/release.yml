@@ -1,0 +1,70 @@
+name: Release
+
+on:
+  push:
+    branches:
+      - master
+
+# Sets permissions of the GITHUB_TOKEN
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+  pull-requests: write
+  packages: write
+
+jobs:
+  release:
+    name: Release
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup PNPM
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9
+
+      - uses: actions/setup-node@v4
+        with:
+          # use lts, bump this if new major becomes lts
+          node-version: 24.x
+ 
+      - name: Install Dependencies
+        run: pnpm install
+
+      - name: Create Release Pull Request or Publish to npm
+        id: changesets
+        uses: changesets/action@v1
+        with:
+          # This expects you to have a script called release which does a build for your packages and calls changeset publish
+          publish: npm run release 
+        env:
+
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+          # Parse publishedPackages JSON (it's an array like [{"name": "@scope/pkg", "version": "1.0.1"}])
+          PUBLISHED_PKGS=$(echo '${{ steps.changesets.outputs.publishedPackages }}' | jq -r '.[] | "* \(.name): \(.version)*"')
+
+          # Build payload with dynamic package list
+          PAYLOAD=$(cat <<EOF
+          {
+            "channel": "#packages",
+            "username": "GitHub Actions",
+            "icon_emoji": ":package:",
+            "text": "*New release published for ${{ github.repository }}!*",
+            "blocks": [
+              {
+                "type": "section",
+                "text": {
+                  "type": "mrkdwn",
+                  "text": "Packages updated:\n$PUBLISHED_PKGS\n\n*Workflow:* <${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}|View run>"
+                }
+              }
+            ]
+          }
+          EOF
+          )
+
+          # Send to Slack
+          curl -X POST -H 'Content-type: application/json' --data "$PAYLOAD" "$SLACK_WEBHOOK_URL"

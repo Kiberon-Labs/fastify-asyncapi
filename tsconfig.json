@@ -1,0 +1,49 @@
+{
+    "$schema": "https://json.schemastore.org/tsconfig",
+    "compilerOptions": {
+        "composite": false,
+        "declaration": true,
+        "declarationMap": true /* Create sourcemaps for d.ts files. */,
+        "emitDecoratorMetadata": true,
+        "esModuleInterop": true,
+        "experimentalDecorators": true,
+        "forceConsistentCasingInFileNames": true,
+        "inlineSources": false,
+        "isolatedModules": true /* Ensure that each file can be safely transpiled without relying on other imports. */,
+        "jsx": "react-jsx",
+        "lib": [
+            "esnext",
+            "dom",
+            "dom.iterable"
+        ],
+        "newLine": "lf",
+        "noEmitOnError": true,
+        "noFallthroughCasesInSwitch": true,
+        "noImplicitOverride": true, // These cause issues with decorators
+        "noImplicitReturns": true,
+        "noUncheckedIndexedAccess": true,
+        "noUnusedLocals": false,
+        "noUnusedParameters": false,
+        "preserveWatchOutput": true,
+        "resolveJsonModule": true, // ESM doesn't yet support JSON modules.
+        "skipLibCheck": true,
+        "sourceMap": true /* Create source map files for emitted JavaScript files. */,
+        "strict": true,
+        "target": "ES2022",
+        "useDefineForClassFields": true,
+        "verbatimModuleSyntax": true,
+        "outDir": "dist",
+        "rootDir": "src",
+        "moduleResolution": "NodeNext",
+        "module": "NodeNext"
+    },
+    "include": [
+        "src/**/*"
+    ],
+    "exclude": [
+        "node_modules",
+        "**/coverage/*",
+        "**/dist/*",
+        "tests"
+    ]
+}
