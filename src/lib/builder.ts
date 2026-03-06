@@ -349,7 +349,7 @@ export class AsyncAPIDocument {
 
         // Merge root-level specification extensions
         for (const [key, value] of Object.entries(this._extensions)) {
-            (doc as Record<string, unknown>)[key] = value;
+            (doc as any)[key] = value;
         }
 
         return doc;
